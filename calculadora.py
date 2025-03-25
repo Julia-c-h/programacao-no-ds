@@ -1,12 +1,12 @@
-# Declara as variáveis numéricas
-num1 = float(input("Digite o primeiro número: "))
-num2 = float(input("Digite o segundo número: "))
+Digite o primeiro número: 
+2
+Digite o segundo número: 
+2
+Soma: 4.0
+subtracao: 0.0
+multiplicacao: 4.0
+divisao: 1.0
 
-# Configura a lógica das operações
-soma = num1 + num2
-subtracao = num1 - num2
 
-# Exibe os resultados
-print(f"Soma: {soma}")
-print(f"Subtração: {subtracao}")
-
+** Process exited - Return Code: 0 **
+Press Enter to exit terminal
