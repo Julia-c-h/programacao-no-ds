@@ -1,29 +1,43 @@
-# Exemplo de game loop no Python para jogo da forca
-palavra_secreta = "girafa"
-letras_acertadas = ["_", "_", "_", "_", "_", "_"]
+palavra_secreta = "girafa".lower()  # Torna a palavra secreta consistente em letras minúsculas
+letras_acertadas = ["_"] * len(palavra_secreta)
 tentativas = 6
+desenho_forca = [
+    "  O  ",  # Cabeça
+    "  |  ",  # Tronco
+    " /|\\ ", # Braços
+    " / \\ ", # Pernas
+    "===== ", # Base
+]
+
+print("Bem-vindo ao jogo da forca! Você tem 6 tentativas.\n")
 
 while tentativas > 0 and "_" in letras_acertadas:
+    print("Forca:")
+    for parte in desenho_forca[:6 - tentativas]:
+        print(parte)
+    
+    print("\nPalavra:", " ".join(letras_acertadas))
     palpite = input("Digite uma letra: ").lower()
-
+    
+    if len(palpite) != 1 or not palpite.isalpha():
+        print("Por favor, insira apenas uma única letra válida.")
+        continue
+    
     if palpite in palavra_secreta:
-        index = 0
-        for letra in palavra_secreta:
-            if palpite == letra:
-                letras_acertadas[index] = letra
-            index += 1
+        indices = [i for i, letra in enumerate(palavra_secreta) if letra == palpite]
+        for i in indices:
+            letras_acertadas[i] = palpite
+        print("Você acertou uma letra!")
     else:
         tentativas -= 1
-        print(f"Você tem {tentativas} tentativas restantes.")
+        print(f"Letra incorreta! Você tem {tentativas} tentativas restantes.")
     
-    print(" ".join(letras_acertadas))
+    print("\n")
 
 if "_" not in letras_acertadas:
     print("Parabéns, você ganhou!")
 else:
     print("Que pena, você perdeu. A palavra era:", palavra_secreta)
-
-""" Este código ilustra um game loop básico para o jogo da forca, 
-onde o jogador tem um número limitado de tentativas para adivinhar
-a palavra secreta. O loop continua até que o jogador acerte a 
-palavra ou esgote suas tentativas. """
+    print("\nForca final:")
+    for parte in desenho_forca:
+        print(parte)
