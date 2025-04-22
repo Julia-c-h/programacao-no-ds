@@ -1,0 +1,45 @@
+-- Criação da tabela Aluno
+CREATE TABLE Aluno (
+    id_aluno INT PRIMARY KEY, -- Identificação única do aluno
+    nome VARCHAR(50),
+    idade INT
+);
+
+-- Criação da tabela Professor
+CREATE TABLE Professor (
+    id_professor INT PRIMARY KEY, -- Identificação única do professor
+    nome_professor VARCHAR(50),
+    cpf_professor VARCHAR(11) -- CPF do professor com tamanho padrão de 11 caracteres
+);
+
+-- Criação da tabela Escola
+CREATE TABLE Escola (
+    id_escola INT PRIMARY KEY, -- Identificação única da escola
+    nome_escola VARCHAR(50),
+    cnpj_escola VARCHAR(14) -- CNPJ da escola com tamanho padrão de 14 caracteres
+);
+
+-- Inserindo dados na tabela Aluno
+INSERT INTO Aluno (id_aluno, nome, idade)
+VALUES
+(1, 'Ana Costa', 18),
+(2, 'João Silva', 20),
+(3, 'Maria Oliveira', 19),
+(4, 'Bianca Pinheiro', 16),
+(5, 'Isabeli Hanke', 17);
+
+-- Inserindo dados na tabela ???
+INSERT INTO Professor (id_professor, nome_professor, cpf_professor)
+VALUES
+(1, 'Carlos Souza', 9876543210),
+(2, 'Fernanda Lima', 9123456789),
+(3, 'Ricardo Martins', 9988776655);
+
+-- Inserindo dados na tabela Escola
+INSERT INTO Escola (id_escola, nome_escola, cnpj_escola)
+VALUES
+(1, 'Escola São Paulo', 11345976467890),
+(2, 'Escola do Futuro', 21987876565432),
+(3, 'Colégio Horizonte', 31987654098320);
+
+SELECT * FROM Aluno;
