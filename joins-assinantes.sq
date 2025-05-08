@@ -1,0 +1,39 @@
+SELECT 
+    A.nm_assinante AS Nome_Assinante,
+    E.ds_endereco AS Endereco,
+    E.complemento,
+    E.bairro,
+    E.cep,
+    M.ds_municipio AS Municipio,
+    T.dd AS DDD,
+    T.n_fone AS Telefone
+FROM Assinante A
+JOIN Endereco E ON A.cd_endereco = E.cd_endereco
+JOIN Municipio M ON E.cd_municipio = M.cd_municipio
+LEFT JOIN Telefone T ON A.cd_assinante = T.cd_assinante;
+
+SELECT a.nm_assinante, r.ds_ramo
+FROM Assinante a
+LEFT JOIN Ramo r ON a.cd_ramo = r.cd_ramo
+ORDER BY r.ds_ramo, a.nm_assinante;
+
+SELECT a.nm_assinante
+FROM Assinante a
+JOIN Endereco e ON a.cd_endereco = e.cd_endereco
+JOIN Municipio m ON e.cd_municipio = m.cd_municipio
+JOIN Tipo_Assinante t ON a.cd_tipo = t.cd_tipo
+WHERE m.ds_municipio = 'Pelotas' AND t.ds_tipo = 'Residencial';
+
+SELECT a.nm_assinante
+FROM Assinante a
+JOIN Telefone t ON a.cd_assinante = t.cd_assinante
+GROUP BY a.nm_assinante
+HAVING COUNT(t.cd_fone) > 1;
+
+SELECT a.nm_assinante, t.dd, t.n_fone, tp.ds_tipo
+FROM Assinante a
+JOIN Telefone t ON a.cd_assinante = t.cd_assinante
+JOIN Tipo_Assinante tp ON a.cd_tipo = tp.cd_tipo
+JOIN Endereco e ON a.cd_endereco = e.cd_endereco
+JOIN Municipio m ON e.cd_municipio = m.cd_municipio
+WHERE tp.ds_tipo = 'Comercial' AND (m.ds_municipio = 'Natal' OR m.ds_municip
