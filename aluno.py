@@ -24,5 +24,4 @@ alunos_ordenados = sorted(alunos, key=functools.cmp_to_key(comparar_alunos))
 
 print(alunos_ordenados)
 
-*
-3 pontos
+
