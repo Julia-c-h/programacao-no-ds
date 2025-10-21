@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, ttk
 import sqlite3
 
 # Função para conectar ao banco de dados e criar a tabela se não existir
@@ -42,6 +42,31 @@ def limpar_formulario():
     entry_email.delete(0, tk.END)
     entry_telefone.delete(0, tk.END)
 
+# Função para visualizar os clientes cadastrados
+def visualizar_clientes():
+    janela_visualizar = tk.Toplevel(janela)
+    janela_visualizar.title("Clientes Cadastrados")
+
+    tree = ttk.Treeview(janela_visualizar, columns=("ID", "Nome", "Email", "Telefone"), show="headings")
+    tree.heading("ID", text="ID")
+    tree.heading("Nome", text="Nome")
+    tree.heading("Email", text="Email")
+    tree.heading("Telefone", text="Telefone")
+    tree.column("ID", width=50)
+    tree.column("Nome", width=150)
+    tree.column("Email", width=200)
+    tree.column("Telefone", width=100)
+    tree.pack(fill=tk.BOTH, expand=True)
+
+    conexao = sqlite3.connect("clientes.db")
+    cursor = conexao.cursor()
+    cursor.execute("SELECT * FROM clientes")
+    clientes = cursor.fetchall()
+    conexao.close()
+
+    for cliente in clientes:
+        tree.insert("", tk.END, values=cliente)
+
 # Inicializa o banco de dados
 inicializar_banco()
 
@@ -68,6 +93,9 @@ btn_salvar.grid(row=3, column=0, padx=10, pady=15)
 
 btn_limpar = tk.Button(janela, text="Limpar", command=limpar_formulario, width=15, bg="gray", fg="white")
 btn_limpar.grid(row=3, column=1, padx=10, pady=15, sticky="w")
+
+btn_visualizar = tk.Button(janela, text="Visualizar Clientes", command=visualizar_clientes, width=20, bg="blue", fg="white")
+btn_visualizar.grid(row=4, column=0, columnspan=2, pady=10)
 
 # Inicia o loop da interface
 janela.mainloop()
